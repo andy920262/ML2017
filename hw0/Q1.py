@@ -1,16 +1,17 @@
 import sys
 import numpy as np
 
-file1 = open(sys.argv[1], 'r')
-file2 = open(sys.argv[2], 'r')
-
-A = [int(x) for x in file1.readline().split(',')]
+A = []
 B = []
 
-for i in range(50):
-    B.append([int(x) for x in file2.readline().split(',')])
+with open(sys.argv[1], 'r') as file1:
+    for line in file1:
+        A.append([int(x) for x in line.split(',')])
 
-for i in np.sort(np.dot(np.array(A), np.array(B))):
+with open(sys.argv[2], 'r') as file2:
+    for line in file2:
+        B.append([int(x) for x in line.split(',')])
+
+for i in np.sort(np.dot(np.array(A), np.array(B)).ravel()):
     print(i)
-
 
