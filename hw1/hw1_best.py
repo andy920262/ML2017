@@ -11,7 +11,11 @@ PM25 = 9
 VAL_SET = 5
 TRAIN_ITER = 2000
 normp = []
-
+'''
+5 4
+6 5
+12 6
+'''
 def parse_line(line, u, v):
 	data = [0.0 if line[x][0] == 'N' else float(line[x]) for x in range(u, v)]
 	return data
@@ -26,11 +30,12 @@ def read_training_data(path):
 				for feature in range(18):
 					tmp[feature] += parse_line(file.readline().split(','), 3 + 0, 3 + 24)
 			for i in range(MAX_DATA - 9):
-				training_data[0].append([x**(d + 1) for d in range(MOD_DEG) for x in tmp[8][i : i + 9] + tmp[9][i : i + 9] + tmp[5][i : i + 9] + tmp[6][i : i + 9] + tmp[12][i : i + 9] + tmp[7][i : i + 9] + tmp[10][i : i + 9]])
+				training_data[0].append(tmp[5][i + 8 : i + 9] + tmp[7][i + 6 : i + 9] + tmp[8][i + 4: i + 9] + tmp[9][i : i + 9] + tmp[10][i + 7 : i + 9] + [x**2 for x in tmp[8][i + 8 : i + 9] + tmp[9][i + 5 : i + 9]])
 				training_data[1].append(tmp[9][i + 9])
 		training_data[0] = np.array(training_data[0])
 		training_data[1] = np.array(training_data[1])
-		#print(np.corrcoef(training_data[0].transpose())[-1])
+		#print(training_data[0][0], file = sys.stderr)
+		#print(np.corrcoef(training_data[0].transpose())[-1], file = sys.stderr)
 	return training_data
 
 def get_normp(data):
@@ -55,7 +60,7 @@ def testing(path, weight, bias):
 			tmp = []
 			for j in range(18):
 				tmp.append(parse_line(file.readline().split(','), 2 + 0, 2 + 9))
-			testing_data.append([x**(d + 1) for d in range(MOD_DEG) for x in tmp[8] + tmp[9] + tmp[5] + tmp[6] + tmp[12] + tmp[7] + tmp[10]])
+			testing_data.append(tmp[5][8 : 9] + tmp[7][6 : 9] + tmp[8][4 : 9] + tmp[9] + tmp[10][7 : 9] + [x**2 for x in tmp[8][8 : 9] + tmp[9][5 : 9]])
 		testing_data = np.array(testing_data)
 		for i in range(len(testing_data[0])):
 			testing_data[:, i] = (testing_data[:, i] - normp[i][0]) / normp[i][1]
