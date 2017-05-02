@@ -25,7 +25,7 @@ if __name__ == "__main__":
 			horizontal_flip = True)
 	datagen.fit(train_x)
 
-	valid_x, valid_y = load_data('valid', 'train')
+	#valid_x, valid_y = load_data('valid', 'train')
 
 	#model = load_model('model')
 	#model.save_weights('weight')
@@ -38,12 +38,12 @@ if __name__ == "__main__":
 			steps_per_epoch = len(train_x) / 128 * 8,
 			#steps_per_epoch = 1,
 			epochs = 50,
-			validation_data = (valid_x, valid_y),
+			#validation_data = (valid_x, valid_y),
 			callbacks = [history])
 	history.save('history')
 
 	model.save(model_path)
-	model.save_weights('weight')
-	print('\nvalid:', model.evaluate(valid_x, valid_y)[1])
+	#model.save_weights('weight')
+	#print('\nvalid:', model.evaluate(valid_x, valid_y)[1])
 
 	exit()

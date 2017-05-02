@@ -34,7 +34,7 @@ if __name__ == '__main__':
 
 		thres = np.mean(np.abs(heatmap))
 		see = private_pixels[idx].reshape(48, 48)
-		see[np.where(np.abs(heatmap) <= thres)] = np.mean(see)
+		#see[np.where(np.abs(heatmap) <= thres)] = np.mean(see)
 
 		plt.figure()
 		plt.imshow(heatmap, cmap=plt.cm.jet)
