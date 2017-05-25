@@ -76,7 +76,7 @@ def validation_set(x, y, r):
 	n = int(r * x.shape[0])
 
 	x_train, y_train = x[n:], y[n:]
-	x_valid, y_valid = x[:n], y[:n]i
+	x_valid, y_valid = x[:n], y[:n]
 
 	return x_train, y_train, x_valid, y_valid
 
