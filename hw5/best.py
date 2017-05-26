@@ -5,9 +5,11 @@ from keras.layers.normalization import BatchNormalization
 import keras.backend as K
 from keras.optimizers import Adam
 from sklearn.preprocessing import MultiLabelBinarizer
+import nltk
+nltk.download('stopwords')
+nltk.download('wordnet')
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import RegexpTokenizer
-import nltk
 import numpy as np
 import pickle
 import itertools
@@ -97,8 +99,6 @@ def train(argv, x_train, y_train, x_test):
 	return predict
 
 if __name__ == '__main__':
-	nltk.download('stopwords')
-	nltk.download('wordnet')
 	#x_train, y_train = load_train_data('train_data.csv')
 	x_test = load_test_data(sys.argv[1])
 	
