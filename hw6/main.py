@@ -66,7 +66,7 @@ if __name__ == '__main__':
 	model.load_weights('best.hdf5')
 
 	predict = model.predict([user_test, movie_test])
-	out = open('predict.csv', 'w')
+	out = open(output_path, 'w')
 	print('TestDataID,Rating', file = out)
 	for i, x in enumerate(predict):
 		print('{},{}'.format(i + 1, x[0]), file = out)
