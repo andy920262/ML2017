@@ -16,7 +16,7 @@ def load_data(path, mode):
 			if mode == 'train' or mode == 'test':
 				data.append(line[:-1].split(',')[1:])
 			if mode == 'ids':
-				data.append(line[:-1].split(',')[0])
+				data.append(line[:-1].split('::')[0])
 	data = np.array(data, dtype = np.int64)
 	if mode == 'train':
 		data = (data[:, :-1], data[:, -1])
